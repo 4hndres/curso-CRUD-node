@@ -57,10 +57,13 @@ const PostUsers = async (req, res = response) => {
 
 const DeleteUsers = async(req, res = response) => {
     const {userId} = req.params
+    const uid = req.uid
     // Physical deleting
     // const user = await User.findByIdAndDelete(userId)
     const user =  await User.findByIdAndUpdate(userId, {status:false})
-    res.json({ user });
+    // const authenticatedUser = req.user 
+    // res.json({ user, authenticatedUser });
+    res.json({ user});
 };
 
 const PatchUsers = (req, res = response) => {
