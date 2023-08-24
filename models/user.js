@@ -20,7 +20,8 @@ const userSchema = Schema({
     role :{
         type: String,
         required: [true, 'You must enter a role'],
-        emun:['ADMIN_ROLE', 'USER_ROLE']
+        emun:['ADMIN_ROLE', 'USER_ROLE'],
+        default: 'USER_ROLE'
     },
     status :{
         type: Boolean,
@@ -35,7 +36,8 @@ const userSchema = Schema({
 // Sobrescribimos el metodo toObject de para NO devolver 
 // el objeto password y __v al crear un user en la bd 
 userSchema.methods.toJSON = function(){
-    const {__v, password, ...user} = this.toObject()
+    const {__v, password, _id, ...user} = this.toObject()
+    user.uid = _id
     return user
 }
 
