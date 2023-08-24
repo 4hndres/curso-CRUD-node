@@ -20,7 +20,8 @@ const userSchema = Schema({
     role :{
         type: String,
         required: [true, 'You must enter a role'],
-        emun:['ADMIN_ROLE', 'USER_ROLE']
+        emun:['ADMIN_ROLE', 'USER_ROLE'],
+        default: 'USER_ROLE'
     },
     status :{
         type: Boolean,

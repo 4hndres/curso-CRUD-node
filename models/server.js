@@ -33,7 +33,7 @@ class Server {
     // CORS
     this.app.use(cors())
 
-    // PARSEO LECTURA DE BODY
+    // PARSING AND READING FOR THE REQUESTS BODY
     this.app.use(express.json())
 
     // Directorio publico
