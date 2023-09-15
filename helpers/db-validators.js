@@ -20,7 +20,7 @@ const validateEmail = async (email = "") => {
 // VERIFY IF USERS id EXISTS 
 const validateId = async (id = "") => {
   const idExists = await user.findById( id );
-  if (!idExists) throw new Error("The sended id does not exists!!!");
+  if (!idExists) throw new Error("The provided user id does not exists!!!");
 };
 
 
@@ -28,7 +28,7 @@ const validateId = async (id = "") => {
 const categoryExists = async (id = "") => {
   // const idExists = await Category.findById( id );
   const category = await Category.findById( id );
-  if (!category || !category.status) throw new Error("The sended id does not exists!!!");
+  if (!category || !category.status) throw new Error("The provided category id does not exists!!!");
 };
 
 
@@ -36,7 +36,7 @@ const categoryExists = async (id = "") => {
 const productExists = async (id = "") => {
   // const idExists = await Category.findById( id );
   const product = await Product.findById( id );
-  if (!product || !product.status ) throw new Error("The sended id does not exists!!!");
+  if (!product || !product.status ) throw new Error("The provided product id does not exists!!!");
 };
 
 // VERIFIY IF PRODUCTS id EXISTS
@@ -46,4 +46,13 @@ const productIsAvailable = async (id = "") => {
   if (!product.available ) throw new Error("Currently we do not have stock of this product!!!");
 };
 
-module.exports = { validateRole, validateEmail, validateId, categoryExists, productExists, productIsAvailable };
+// VERIFY ALLOWED COLLECTIONS
+const allowedCollections = (collection = '', collections = []) => {
+  const allowed = collections.includes(collection)
+  if(!allowed){
+    throw new Error(`The collection ${collection} is not allowed!!!`)
+  }
+  return true
+}
+
+module.exports = { validateRole, validateEmail, validateId, categoryExists, productExists, productIsAvailable, allowedCollections };
